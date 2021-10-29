@@ -6,10 +6,14 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { Admin } from '../models/admin.interface';
+import { hasRoles } from 'src/auth/decorator/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Admin, AdminRole } from '../models/admin.interface';
 import { AdminService } from '../services/admin.service';
 
 @Controller('admin')
@@ -46,6 +50,16 @@ export class AdminController {
   @Put(':id')
   updateOne(@Param() params: any, @Body() admin: Admin): Observable<any> {
     return this.adminService.updateOne(params.id, admin);
+  }
+
+  @hasRoles(AdminRole.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Put(':id/role')
+  updateRoleOfAdmin(
+    @Param() params: any,
+    @Body() admin: Admin,
+  ): Observable<Admin> {
+    return this.adminService.updateRoleOfAdmin(params.id, admin);
   }
 
   @Delete(':id')

@@ -9,5 +9,6 @@ import { AuthModule } from 'src/auth/auth.module';
   imports: [TypeOrmModule.forFeature([AdminEntity]), AuthModule],
   providers: [AdminService],
   controllers: [AdminController],
+  exports: [AdminService],
 })
 export class AdminModule {}

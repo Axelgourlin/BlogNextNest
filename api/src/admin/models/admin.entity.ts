@@ -1,4 +1,5 @@
 import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { AdminRole } from './admin.interface';
 
 @Entity()
 export class AdminEntity {
@@ -10,6 +11,9 @@ export class AdminEntity {
 
   @Column()
   admin_password: string;
+
+  @Column({ type: 'enum', enum: AdminRole, default: AdminRole.USER })
+  role: AdminRole;
 
   @BeforeInsert()
   nameToLowerCase() {

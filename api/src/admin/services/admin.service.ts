@@ -21,6 +21,7 @@ export class AdminService {
         const newAdmin = new AdminEntity();
         newAdmin.admin_name = admin.admin_name;
         newAdmin.admin_password = passwordHash;
+        newAdmin.role = admin.role;
 
         return from(this.adminRepository.save(newAdmin)).pipe(
           map((admin: Admin) => {
@@ -55,6 +56,10 @@ export class AdminService {
     // delete admin.admin_name;
     // delete admin.admin_password;
 
+    return from(this.adminRepository.update(id, admin));
+  }
+
+  updateRoleOfAdmin(id: number, admin: Admin): Observable<any> {
     return from(this.adminRepository.update(id, admin));
   }
 
