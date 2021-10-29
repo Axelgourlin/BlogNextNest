@@ -6,6 +6,7 @@ import { Connection } from 'typeorm';
 import { AdminModule } from './admin/admin.module';
 import { ArticlesModule } from './articles/articles.module';
 import { CategoriesModule } from './categories/categories.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { CategoriesModule } from './categories/categories.module';
     AdminModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(),
+    AuthModule,
   ],
   controllers: [],
   providers: [],

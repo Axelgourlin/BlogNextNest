@@ -1,6 +1,9 @@
 # Perso
 ormconfig.json
 
+# Environment
+.env
+
 # compiled output
 /dist
 /node_modules

@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class AdminEntity {
@@ -10,4 +10,9 @@ export class AdminEntity {
 
   @Column()
   admin_password: string;
+
+  @BeforeInsert()
+  nameToLowerCase() {
+    this.admin_name = this.admin_name.toLowerCase();
+  }
 }
