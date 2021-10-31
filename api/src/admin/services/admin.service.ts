@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { from, Observable, throwError } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { AdminEntity } from '../models/admin.entity';
-import { Admin } from '../models/admin.interface';
+import { Admin, AdminRole } from '../models/admin.interface';
 import { AuthService } from 'src/auth/service/auth.service';
 
 @Injectable()
@@ -22,6 +22,7 @@ export class AdminService {
         newAdmin.admin_name = admin.admin_name;
         newAdmin.admin_password = passwordHash;
         newAdmin.role = admin.role;
+        // newAdmin.role = AdminRole.USER;
 
         return from(this.adminRepository.save(newAdmin)).pipe(
           map((admin: Admin) => {

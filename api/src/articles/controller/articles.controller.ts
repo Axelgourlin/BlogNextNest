@@ -6,10 +6,14 @@ import {
   Put,
   Param,
   Delete,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Article } from '../models/article.interface';
 import { ArticlesService } from '../articles.service';
+import { Pagination } from 'nestjs-typeorm-paginate';
 
 @Controller('articles')
 export class ArticlesController {
@@ -21,8 +25,16 @@ export class ArticlesController {
   }
 
   @Get()
-  findAll(): Observable<Article[]> {
-    return this.articlesService.findAll();
+  index(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+  ): Observable<Pagination<Article>> {
+    limit = limit > 100 ? 100 : limit;
+    return this.articlesService.paginate({
+      page: Number(page),
+      limit: Number(limit),
+      route: 'http://localhost:4000/articles',
+    });
   }
 
   @Get(':id')
