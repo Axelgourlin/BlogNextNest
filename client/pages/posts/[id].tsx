@@ -1,28 +1,24 @@
-import Layout from "../../components/layout";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllPostIds, getPostData } from "../../lib/posts";
-import Head from "next/head";
-import Date from "../../components/date";
-import utilStyles from "../../styles/utils.module.css";
-import { GetStaticProps, GetStaticPaths } from "next";
-
-export default function Post({
-  postData,
-}: {
-  postData: { title: string; date: string; contentHtml: string };
+import Link from "next/link";
+export default function PostPage({
+  id,
+  postData: { title, date, cover_image, contentHtml },
 }) {
   return (
-    <Layout>
-      <Head>
-        <title>{postData.title}</title>
-      </Head>
-      <article>
-        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-        <div className={utilStyles.lightText}>
-          <Date dateString={postData.date} />
+    <>
+      <Link href="/">
+        <a className="btn btn-back">Go Back</a>
+      </Link>
+      <div className="card card-page">
+        <h1 className="post-title">{title}</h1>
+        <div className="post-date">Posted on {date}</div>
+        <img src={cover_image} alt="" />
+        <div className="post-body">
+          <div dangerouslySetInnerHTML={{ __html: contentHtml }}></div>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-      </article>
-    </Layout>
+      </div>
+    </>
   );
 }
 

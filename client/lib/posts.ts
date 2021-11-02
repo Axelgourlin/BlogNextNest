@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import remark from "remark";
 import html from "remark-html";
 
-const postsDirectory = path.join(process.cwd(), "posts");
+const postsDirectory = path.join(process.cwd(), "Posts");
 
 export function getSortedPostsData() {
   // Get file names under /posts
@@ -16,9 +16,11 @@ export function getSortedPostsData() {
     // Read markdown file as string
     const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
+    console.log("fileContents:", fileContents);
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
+    console.log("matterResult:", matterResult);
 
     // Combine the data with the id
     return {
