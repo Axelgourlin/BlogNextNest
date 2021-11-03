@@ -1,4 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+
+  @font-face {
+    font-family: Poppins;
+    font-weight: 400;
+    src: url("/fonts/Poppins/Poppins-Regular.ttf") format("ttf");
+  }
+
+  @font-face {
+    font-family: Lora;
+    font-weight: 400;
+    src: url("/fonts/Lora/static/Lora-Regular.ttf") format("ttf");
+  }
+}
+
+@layer components {
+  .btn-blue {
+    @apply py-1 px-3 bg-blue-400 text-white font-semibold rounded-lg shadow-md hover:bg-blue-500 focus:outline-none;
+  }
+}
+
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
 * {
   box-sizing: border-box;
@@ -116,4 +147,4 @@ ol {
   .posts {
     grid-template-columns: 1fr;
   }
-}
+} */

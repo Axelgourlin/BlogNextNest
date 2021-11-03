@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import { getAllPostIds, getPostData } from "../../lib/posts";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -12,29 +11,26 @@ export default function PostPage({
     article_createdAt,
   },
 }) {
-  // const myLoader = ({ src, width, quality }) => {
-  //   return `http://localhost:3000${src}?w=${width}&q=${quality || 75}`;
-  // };
 
   return (
-    <>
+    <div className="h-full p-2 relative ">
       <Link href="/">
-        <a className="btn btn-back">Go Back</a>
+        <a className="m-4">Go Back</a>
       </Link>
-      <div className="card card-page">
-        <h1 className="post-title">{article_title}</h1>
-        <div className="post-date">Posted on {article_createdAt}</div>
+      <div className="h-full flex flex-col items-center">
+        <h1 className="my-4">{article_title}</h1>
+        <div className="py-4">Posted on {article_createdAt}</div>
         <Image
-          // loader={myLoader}
-          src={`/${article_bg_img}`}
+          className="absolute inset-0 "
+          src={`/images/posts/${article_bg_img}`}
           alt=""
           width={500}
           height={300}
           layout="responsive"
         />
-        <div className="post-body">{article_text}</div>
+        <p className="w-2/3  text-left leading-loose ">{article_text}</p>
       </div>
-    </>
+    </div>
   );
 }
 
