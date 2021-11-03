@@ -4,6 +4,6 @@ export interface Article {
   article_text?: string;
   article_bg_img?: string;
   article_min_img?: string;
-  article_createdAt?: string;
+  article_createdAt?: Date;
   category_id?: string;
 }

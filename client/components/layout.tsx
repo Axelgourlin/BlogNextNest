@@ -14,6 +14,9 @@ export default function Layout({
   children: React.ReactNode;
   home?: boolean;
 }) {
+  const myLoader = ({ src, width, quality }) => {
+    return `http://localhost:3000${src}?w=${width}&q=${quality || 75}`;
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -36,6 +39,7 @@ export default function Layout({
           <>
             <Image
               priority
+              loader={myLoader}
               src="/images/profile.jpg"
               className={utilStyles.borderCircle}
               height={144}

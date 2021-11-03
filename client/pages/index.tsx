@@ -1,11 +1,9 @@
-import { getSortedPostsData } from "../lib/posts";
 import Link from "next/link";
 import Head from "next/head";
 import { GetStaticProps } from "next";
 import Post from "../components/Posts";
 
 export default function Home({ allPostsData }) {
-  console.log("allPostsData:", allPostsData);
   return (
     <div>
       <Head>
@@ -21,7 +19,9 @@ export default function Home({ allPostsData }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = await fetch("http://localhost:4000/articles")
+    .then((r) => r.json())
+    .then((res) => res.items);
 
   return {
     props: {

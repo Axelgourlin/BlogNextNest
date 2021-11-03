@@ -18,7 +18,7 @@ export class ArticleEntity {
   article_min_img: string;
 
   @Column({ nullable: true })
-  article_createdAt: string;
+  article_createdAt: Date;
 
   @Column({ nullable: true })
   category_id: string;

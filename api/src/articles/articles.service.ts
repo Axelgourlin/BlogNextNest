@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Like, Repository, UpdateResult } from 'typeorm';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ArticleEntity } from './models/article.entity';
@@ -33,6 +33,56 @@ export class ArticlesService {
       }),
     );
   }
+
+  // paginateFilterByArticleTitle(
+  //   options: IPaginationOptions,
+  //   article: Article,
+  // ): Observable<Pagination<Article>> {
+  //   return from(
+  //     this.ArticlesRepository.findAndCount({
+  //       skip: options.page,
+  //       take: options.limit || 10,
+  //       order: { id: '' },
+  //       select: [
+  //         'id',
+  //         'article_title',
+  //         'article_text',
+  //         'article_bg_img',
+  //         'article_min_img',
+  //         'article_createdAt',
+  //         'category_id',
+  //       ],
+  //       where: [{ articleName: Like(`%${article.article_title}%`) }],
+  //     }),
+  //   ).pipe(
+  //     map(([articles, totalArticles]) => {
+  //       const articlesPageable: Pagination<Article> = {
+  //         items: articles,
+  //         links: {
+  //           first: options.route + `?limit=${options.limit}`,
+  //           previous: options.route + '',
+  //           next:
+  //             options.route +
+  //             `?limit=${options.limit}&page=${+options.page + 1}`,
+  //           last:
+  //             options.route +
+  //             `?limit=${options.limit}&page=${Math.ceil(
+  //               totalArticles / +options.limit,
+  //             )}`,
+  //         },
+  //         meta: {
+  //           currentPage: +options.page,
+  //           itemCount: articles.length,
+  //           itemsPerPage: +options.limit,
+  //           totalItems: totalArticles,
+  //           totalPages: +totalArticles / +options.limit,
+  //         },
+  //       };
+
+  //       return articlesPageable;
+  //     }),
+  //   );
+  // }
 
   findOne(id: number): Observable<ArticleEntity> {
     return from(this.ArticlesRepository.findOne(id));
