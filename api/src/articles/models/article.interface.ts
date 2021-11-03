@@ -1,6 +1,7 @@
 export interface Article {
   id?: number;
   article_title?: string;
+  article_resume?: string;
   article_text?: string;
   article_bg_img?: string;
   article_min_img?: string;

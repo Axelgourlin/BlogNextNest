@@ -9,6 +9,9 @@ export class ArticleEntity {
   article_title: string;
 
   @Column({ nullable: true })
+  article_resume: string;
+
+  @Column({ nullable: true })
   article_text: string;
 
   @Column({ nullable: true })
